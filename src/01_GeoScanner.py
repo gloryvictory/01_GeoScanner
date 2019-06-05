@@ -50,6 +50,7 @@ def ScanDir(dir = ''):
     PLATFORM = platform
     LOGGER.info("Platform is: " + PLATFORM)
     SEPARATOR = os.sep
+    LOGGER.info("Os separator is: " + os.sep)
     LOGGER.info(os.environ)
     LOGGER.info(os.uname())
     #dirname = '/Users/Macintosh/Desktop/Dropbox/MyPrj/MyGeo/01_GeoScanner/TestGeoData'
@@ -92,8 +93,8 @@ def Main():
     global LOGGER
     LOGGER = InitLogFile()
 
-    #ScanDir('/Users/Macintosh/Desktop/Dropbox/MyPrj/MyGeo/01_GeoScanner/TestGeoData')
-    ScanDir('')
+    ScanDir('/Users/Macintosh/Desktop/Dropbox/MyPrj/MyGeo/01_GeoScanner/TestGeoData')
+    #ScanDir('')
 
 
 
