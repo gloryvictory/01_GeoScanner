@@ -75,10 +75,11 @@ def ScanDir(dir = ''):
                 pass
 
             else:
-                print(filePath)
-                filetime = os.path.getctime(filePath)
-                filesize = os.path.getsize(filePath)
+                #print(filePath)
+                filetime = str(os.path.getctime(filePath))
+                filesize = str(os.path.getsize(filePath))
                 #f = open (filePath, 'r')
+                print(filePath+ ", "+ filesize+", "+ filetime)
 
 
 
