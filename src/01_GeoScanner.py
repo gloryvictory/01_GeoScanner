@@ -15,7 +15,6 @@ from datetime import datetime
 import logging
 from sys import platform
 import os
-import os.path
 import sys
 
 
@@ -76,10 +75,11 @@ def ScanDir(dir = ''):
 
             else:
                 #print(filePath)
-                filetime = str(os.path.getctime(filePath))
+
+                filetime = str(datetime.fromtimestamp(os.path.getctime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
                 filesize = str(os.path.getsize(filePath))
                 #f = open (filePath, 'r')
-                print(filePath+ ", "+ filesize+", "+ filetime)
+                print(filePath+ ", " + filesize+", " + filetime)
 
 
 
