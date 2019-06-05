@@ -3,3 +3,5 @@
 
 # Why
 There are not any tools for this task.
+
+# License - MIT
