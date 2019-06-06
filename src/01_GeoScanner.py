@@ -16,6 +16,7 @@ import logging
 from sys import platform
 import os
 import platform
+from sys import platform as _platform
 import sys
 
 
@@ -49,12 +50,23 @@ def ScanDir(dir = ''):
     global SEPARATOR
 
     PLATFORM = platform
-    LOGGER.info("Platform is: " + str(PLATFORM))
     SEPARATOR = os.sep
+
+    LOGGER.info("Platform is: " + str(PLATFORM))
     LOGGER.info("Os separator is: " + os.sep)
     LOGGER.info(os.environ)
     LOGGER.info(platform.uname())
     #dirname = '/Users/Macintosh/Desktop/Dropbox/MyPrj/MyGeo/01_GeoScanner/TestGeoData'
+
+
+
+    if _platform == "linux" or _platform == "linux2" or _platform == "darwin":
+    # linux OR MAC OS X
+        print(str(_platform))
+    elif _platform == "win32" or _platform == "win64":
+    # Windows or Windows 64-bit
+        print(str(_platform))
+
     if len(dir) == 0:
         dirname = str(os.getcwd())
     else:
