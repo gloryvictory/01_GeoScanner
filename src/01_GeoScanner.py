@@ -48,12 +48,15 @@ def ScanDir(dir = ''):
 
     global PLATFORM
     global SEPARATOR
+    global COMPNAME
 
     PLATFORM = platform
     SEPARATOR = os.sep
+    COMPNAME = platform.node()
+
 
     LOGGER.info("Platform is: " + str(PLATFORM))
-    LOGGER.info("Os separator is: " + os.sep)
+    LOGGER.info("OS separator is: " + os.sep)
     LOGGER.info(os.environ)
     LOGGER.info(platform.uname())
     #dirname = '/Users/Macintosh/Desktop/Dropbox/MyPrj/MyGeo/01_GeoScanner/TestGeoData'
@@ -93,7 +96,7 @@ def ScanDir(dir = ''):
                 filetime = str(datetime.fromtimestamp(os.path.getctime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
                 filesize = str(os.path.getsize(filePath))
                 #f = open (filePath, 'r')
-                print(filePath + ", " + filesize+", " + filetime)
+                print(COMPNAME + ", " + filePath + ", " + filesize+", " + filetime)
 
 
 
