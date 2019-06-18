@@ -54,20 +54,18 @@ def ScanDir(dir = ''):
     SEPARATOR = os.sep
     COMPNAME = platform.node()
 
-
     LOGGER.info("Platform is: " + str(PLATFORM))
     LOGGER.info("OS separator is: " + os.sep)
     LOGGER.info(os.environ)
     LOGGER.info(platform.uname())
-    #dirname = '/Users/Macintosh/Desktop/Dropbox/MyPrj/MyGeo/01_GeoScanner/TestGeoData'
+    # dirname = '/Users/Macintosh/Desktop/Dropbox/MyPrj/MyGeo/01_GeoScanner/TestGeoData'
 
-
-
-    if _platform == "linux" or _platform == "linux2" or _platform == "darwin":
     # linux OR MAC OS X
+    if _platform == "linux" or _platform == "linux2" or _platform == "darwin":
         print(str(_platform))
-    elif _platform == "win32" or _platform == "win64":
+
     # Windows or Windows 64-bit
+    elif _platform == "win32" or _platform == "win64":
         print(str(_platform))
 
     if len(dir) == 0:
@@ -91,12 +89,12 @@ def ScanDir(dir = ''):
                 pass
 
             else:
-                #print(filePath)
+                # print(filePath)
 
                 filetime_с = str(datetime.fromtimestamp(os.path.getctime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
                 filetime_a = str(datetime.fromtimestamp(os.path.getatime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
                 filesize = str(os.path.getsize(filePath))
-                #f = open (filePath, 'r')
+                # f = open (filePath, 'r')
                 print(COMPNAME + ", " + filePath + ", " + filesize + ", " + filetime_с + ", " + filetime_a)
 
 
