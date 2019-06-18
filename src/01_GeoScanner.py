@@ -100,10 +100,7 @@ def ScanDir(dir = ''):
                 print(COMPNAME + ", " + filePath + ", " + filesize + ", " + filetime_с + ", " + filetime_a)
 
 
-
-
-
-def Main():
+def main():
     time1 = datetime.now()
     print('Starting at :' + str(time1))
 
@@ -122,6 +119,5 @@ def Main():
     print('DONE !!!!')
 
 
-
 if __name__ == '__main__':
-    Main()
+    main()
