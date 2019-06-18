@@ -93,10 +93,11 @@ def ScanDir(dir = ''):
             else:
                 #print(filePath)
 
-                filetime = str(datetime.fromtimestamp(os.path.getctime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
+                filetimeс = str(datetime.fromtimestamp(os.path.getctime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
+                filetimea = str(datetime.fromtimestamp(os.path.getatime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
                 filesize = str(os.path.getsize(filePath))
                 #f = open (filePath, 'r')
-                print(COMPNAME + ", " + filePath + ", " + filesize+", " + filetime)
+                print(COMPNAME + ", " + filePath + ", " + filesize + ", " + filetimeс + ", " + filetimea)
 
 
 
