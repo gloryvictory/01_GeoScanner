@@ -4,8 +4,8 @@
 #   Author  :   Viacheslav Zamaraev
 #   email   :   zamaraev@gmail.com
 #   Date    :   10.01.2019
-#   Copyright   : (C) 2018 by Luis Calisto and Andre Mano
-#   Desc    :   script for finding geodata (shp, mif/mid, gps ...) and metadata
+#   Copyright   : (C) 2019 by Viacheslav Zamaraev
+#   Desc    :   script for finding geodata (shp, mif/mid, gps ...) and metadata and all data on Windows/linux/mac disks
 
 
 import os
@@ -29,12 +29,13 @@ def setup_logger(logger_name = 'log', level=logging.INFO):
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     fileHandler = logging.FileHandler(log_file, mode='w')
     fileHandler.setFormatter(formatter)
-    #streamHandler = logging.StreamHandler()
-    #streamHandler.setFormatter(formatter)
+    # streamHandler = logging.StreamHandler()
+    # streamHandler.setFormatter(formatter)
 
     l.setLevel(level)
     l.addHandler(fileHandler)
-    #l.addHandler(streamHandler)
+    # l.addHandler(streamHandler)
+
 
 def InitLogFile():
     setup_logger('01_GeoScanner')
@@ -43,8 +44,8 @@ def InitLogFile():
     return logger
 
 
-def ScanDir(dir = ''):
-    LOGGER.info("test")
+def ScanDir( dir_root = ''):
+    LOGGER.info("scan_directory")
 
     global PLATFORM
     global SEPARATOR
@@ -60,18 +61,21 @@ def ScanDir(dir = ''):
     LOGGER.info(platform.uname())
     # dirname = '/Users/Macintosh/Desktop/Dropbox/MyPrj/MyGeo/01_GeoScanner/TestGeoData'
 
+    if len(dir_root) == 0:
+        dirname = str(os.getcwd())
+    else:
+        dirname = str(dir_root)
+
     # linux OR MAC OS X
     if _platform == "linux" or _platform == "linux2" or _platform == "darwin":
         print(str(_platform))
+        dirname = str("/")
 
     # Windows or Windows 64-bit
     elif _platform == "win32" or _platform == "win64":
         print(str(_platform))
 
-    if len(dir) == 0:
-        dirname = str(os.getcwd())
-    else:
-        dirname = str(dir)
+
 
     # for root, files in os.walk(dirname):
     #     for f in files:
