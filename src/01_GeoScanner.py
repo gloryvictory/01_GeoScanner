@@ -91,11 +91,11 @@ def ScanDir(dir = ''):
             else:
                 # print(filePath)
 
-                filetime_с = str(datetime.fromtimestamp(os.path.getctime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
+                filetime_c = str(datetime.fromtimestamp(os.path.getctime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
                 filetime_a = str(datetime.fromtimestamp(os.path.getatime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
                 filesize = str(os.path.getsize(filePath))
                 # f = open (filePath, 'r')
-                print(COMPNAME + ", " + filePath + ", " + filesize + ", " + filetime_с + ", " + filetime_a)
+                print(COMPNAME + ", " + filePath + ", " + filesize + ", " + filetime_c + ", " + filetime_a)
 
 
 def main():
@@ -105,7 +105,7 @@ def main():
     global LOGGER
     LOGGER = InitLogFile()
 
-    ScanDir('/Users/Macintosh/Desktop/Dropbox/MyPrj/MyGeo/01_GeoScanner/TestGeoData')
+    ScanDir('')
     #ScanDir('')
 
 
