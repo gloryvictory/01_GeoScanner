@@ -34,7 +34,6 @@ def get_list_from_file(file):
     return lst
 
 
-
 def setup_logger(logger_name = 'log', level=logging.INFO):
     log_file = logger_name + '.log'
     l = logging.getLogger(logger_name)
@@ -56,7 +55,7 @@ def InitLogFile():
     return logger
 
 
-def ScanDir( dir_root = ''):
+def ScanDir(dir_root=''):
     LOGGER.info("scan_directory")
 
     global PLATFORM
@@ -91,6 +90,8 @@ def ScanDir( dir_root = ''):
         print(str(_platform))
         available_drives = ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
         LOGGER.info("Disk drives are " + str(available_drives))
+        dirname = available_drives[0] + SEPARATOR
+        LOGGER.info("Folder are " + str(dirname))
 
 
     # for root, files in os.walk(dirname):
@@ -99,6 +100,7 @@ def ScanDir( dir_root = ''):
     #         print(filepath)
     #
     # pass
+
     for root, subdirs, files in os.walk(dirname):
 
         for file in os.listdir(root):
@@ -110,12 +112,16 @@ def ScanDir( dir_root = ''):
 
             else:
                 # print(filePath)
+                try:
+                    filetime_c = str(datetime.fromtimestamp(os.path.getctime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
+                    filetime_a = str(datetime.fromtimestamp(os.path.getatime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
+                    filesize = str(os.path.getsize(filePath))
+                    # f = open (filePath, 'r')
+                    print(COMPNAME + ", " + filePath + ", " + filesize + ", " + filetime_c + ", " + filetime_a)
 
-                filetime_c = str(datetime.fromtimestamp(os.path.getctime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
-                filetime_a = str(datetime.fromtimestamp(os.path.getatime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
-                filesize = str(os.path.getsize(filePath))
-                # f = open (filePath, 'r')
-                print(COMPNAME + ", " + filePath + ", " + filesize + ", " + filetime_c + ", " + filetime_a)
+                except Exception as e:
+                    LOGGER.error("Exception occurred", exc_info=True)
+
 
 
 def main():
