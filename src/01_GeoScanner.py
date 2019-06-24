@@ -90,8 +90,9 @@ def ScanDir(dir_root=''):
         print(str(_platform))
         available_drives = ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
         LOGGER.info("Disk drives are " + str(available_drives))
-        dirname = available_drives[0] + SEPARATOR
-        LOGGER.info("Folder are " + str(dirname))
+
+        # dirname = available_drives[0] + SEPARATOR
+        # LOGGER.info("Folder are " + str(dirname))
 
 
     # for root, files in os.walk(dirname):
@@ -134,7 +135,7 @@ def main():
     global file_exclude
     global LIST_EXCLUDE
 
-    file_exclude = 'exclude.txt'
+    file_exclude = 'exclusions.txt'
     LIST_EXCLUDE = []
     try:
         if os.path.isfile(file_exclude):
