@@ -62,10 +62,12 @@ def ScanDir( dir_root = ''):
     global PLATFORM
     global SEPARATOR
     global COMPNAME
+    global FILE_CSV
 
     PLATFORM = platform
     SEPARATOR = os.sep
     COMPNAME = platform.node()
+    FILE_CSV = COMPNAME
 
     LOGGER.info("Platform is: " + str(PLATFORM))
     LOGGER.info("OS separator is: " + os.sep)
@@ -82,6 +84,7 @@ def ScanDir( dir_root = ''):
     if _platform == "linux" or _platform == "linux2" or _platform == "darwin":
         print(str(_platform))
         # dirname = str("/")
+        dirname = '/Users/Macintosh/Desktop/Dropbox/MyPrj/MyGeo/01_GeoScanner/TestGeoData'
 
     # Windows or Windows 64-bit
     elif _platform == "win32" or _platform == "win64":
