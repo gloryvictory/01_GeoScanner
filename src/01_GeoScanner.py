@@ -18,8 +18,20 @@ import os
 import platform
 from sys import platform as _platform
 import sys
+import string
 
 
+
+def get_list_from_file(file):
+
+    lst = []
+    with open(file, "r", errors='ignore') as f:
+        lst = f.read().splitlines()
+        if len(lst) > 2:
+            lst[-1] = lst[-1].strip()  # удаляем последний \n
+            # del lst[-1]
+        f.close()
+    return lst
 
 
 
@@ -69,12 +81,13 @@ def ScanDir( dir_root = ''):
     # linux OR MAC OS X
     if _platform == "linux" or _platform == "linux2" or _platform == "darwin":
         print(str(_platform))
-        dirname = str("/")
+        # dirname = str("/")
 
     # Windows or Windows 64-bit
     elif _platform == "win32" or _platform == "win64":
         print(str(_platform))
-
+        available_drives = ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
+        LOGGER.info("Disk drives are " + str(available_drives))
 
 
     # for root, files in os.walk(dirname):
@@ -108,6 +121,21 @@ def main():
 
     global LOGGER
     LOGGER = InitLogFile()
+
+    global file_exclude
+    global LIST_EXCLUDE
+
+    file_exclude = 'exclude.txt'
+    LIST_EXCLUDE = []
+    try:
+        if os.path.isfile(file_exclude):
+            LIST_EXCLUDE = get_list_from_file(file_exclude)
+        else:
+            LOGGER.info("File not found: " + file_exclude)
+            LIST_EXCLUDE = []
+    except Exception as e:
+        LOGGER.error("Exception occurred", exc_info=True)
+
 
     ScanDir('')
     #ScanDir('')
