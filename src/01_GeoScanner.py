@@ -96,7 +96,7 @@ def ScanDir(dir_root=''):
         # LOGGER.info("Folder are " + str(dirname))
         file_name = COMPNAME + "_" + str(available_drives[0]).replace(":", "")
         with open(file_name, 'w') as f:
-            f.write('compname' + CSV_SEPARATOR +'' + '\n')
+            f.write('compname' + CSV_SEPARATOR +'folder' + CSV_SEPARATOR +'size'+ + CSV_SEPARATOR +'ctime'+ CSV_SEPARATOR +'mtime' + CSV_SEPARATOR +'atime' + '\n')
 
     # for root, files in os.walk(dirname):
     #     for f in files:
