@@ -65,6 +65,7 @@ def ScanDir(dir_root=''):
 
     PLATFORM = platform
     SEPARATOR = os.sep
+    CSV_SEPARATOR = ";"
     COMPNAME = platform.node()
     FILE_CSV = COMPNAME
 
@@ -93,7 +94,9 @@ def ScanDir(dir_root=''):
 
         # dirname = available_drives[0] + SEPARATOR
         # LOGGER.info("Folder are " + str(dirname))
-
+        file_name = COMPNAME + "_" + str(available_drives[0]).replace(":", "")
+        with open(file_name, 'w') as f:
+            f.write('compname' + CSV_SEPARATOR +'' + '\n')
 
     # for root, files in os.walk(dirname):
     #     for f in files:
@@ -101,6 +104,7 @@ def ScanDir(dir_root=''):
     #         print(filepath)
     #
     # pass
+
 
     for root, subdirs, files in os.walk(dirname):
 
@@ -115,10 +119,11 @@ def ScanDir(dir_root=''):
                 # print(filePath)
                 try:
                     filetime_c = str(datetime.fromtimestamp(os.path.getctime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
+                    filetime_m = str(datetime.fromtimestamp(os.path.getmtime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
                     filetime_a = str(datetime.fromtimestamp(os.path.getatime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
                     filesize = str(os.path.getsize(filePath))
                     # f = open (filePath, 'r')
-                    print(COMPNAME + ", " + filePath + ", " + filesize + ", " + filetime_c + ", " + filetime_a)
+                    print(COMPNAME + ", " + filePath + ", " + filesize + ", " + filetime_c + ", " + filetime_m + ", " + filetime_a)
 
                 except Exception as e:
                     LOGGER.error("Exception occurred", exc_info=True)
