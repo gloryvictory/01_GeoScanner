@@ -62,6 +62,7 @@ def ScanDir(dir_root=''):
     global SEPARATOR
     global COMPNAME
     global FILE_CSV
+    global CSV_SEPARATOR
 
     PLATFORM = platform
     SEPARATOR = os.sep
@@ -94,9 +95,9 @@ def ScanDir(dir_root=''):
 
         # dirname = available_drives[0] + SEPARATOR
         # LOGGER.info("Folder are " + str(dirname))
-        file_name = COMPNAME + "_" + str(available_drives[0]).replace(":", "")
+        file_name = COMPNAME + "_" + str(available_drives[0]).replace(":", "") + '.csv'
         with open(file_name, 'w') as f:
-            f.write('compname' + CSV_SEPARATOR +'folder' + CSV_SEPARATOR +'size'+ + CSV_SEPARATOR +'ctime'+ CSV_SEPARATOR +'mtime' + CSV_SEPARATOR +'atime' + '\n')
+            f.write('$compname' + CSV_SEPARATOR + 'FullName' + CSV_SEPARATOR + 'Length' + CSV_SEPARATOR + 'CreationTime' + CSV_SEPARATOR + 'ModifiedTime' + CSV_SEPARATOR + 'AccessTime' + '\n')
 
     # for root, files in os.walk(dirname):
     #     for f in files:
@@ -104,7 +105,6 @@ def ScanDir(dir_root=''):
     #         print(filepath)
     #
     # pass
-
 
     for root, subdirs, files in os.walk(dirname):
 
@@ -145,6 +145,7 @@ def main():
     try:
         if os.path.isfile(file_exclude):
             LIST_EXCLUDE = get_list_from_file(file_exclude)
+            LOGGER.info("File exclusions found. Excludes folders count: " + str(len(LIST_EXCLUDE)))
         else:
             LOGGER.info("File not found: " + file_exclude)
             LIST_EXCLUDE = []
