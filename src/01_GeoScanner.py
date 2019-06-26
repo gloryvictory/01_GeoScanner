@@ -105,16 +105,18 @@ def ScanDir(dir_root=''):
     #         print(filepath)
     #
     # pass
+    time1 = datetime.now()
+    LOGGER.info("Start scan at" + str(time1))
+    dir_count = 0
 
     for root, subdirs, files in os.walk(dirname):
 
         for file in os.listdir(root):
 
-            filePath = os.path.join(root, file)
+            file_path = str(os.path.join(root, file))
 
-            if os.path.isdir(filePath):
-                pass
-
+            if os.path.isdir(file_path):
+                dir_count += 1
             else:
                 # print(filePath)
                 try:
@@ -123,10 +125,19 @@ def ScanDir(dir_root=''):
                     filetime_a = str(datetime.fromtimestamp(os.path.getatime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
                     filesize = str(os.path.getsize(filePath))
                     # f = open (filePath, 'r')
-                    print(COMPNAME + ", " + filePath + ", " + filesize + ", " + filetime_c + ", " + filetime_m + ", " + filetime_a)
+
+                    str_to_file = COMPNAME + ", " + file_path + ", " + filesize + ", " + filetime_c + ", " + filetime_m + ", " + filetime_a
+                    print(str_to_file)
 
                 except Exception as e:
                     LOGGER.error("Exception occurred", exc_info=True)
+
+    LOGGER.info("Directory count " + str(dir_count))
+    time1 = datetime.now()
+    LOGGER.info("Start scan at" + str(time1))
+    time2 = datetime.now()
+    LOGGER.info("Stop scan at" + str(time2))
+    LOGGER.info("Duration scan " + str(time2 - time1))
 
 
 
