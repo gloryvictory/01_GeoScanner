@@ -120,10 +120,10 @@ def ScanDir(dir_root=''):
             else:
                 # print(filePath)
                 try:
-                    filetime_c = str(datetime.fromtimestamp(os.path.getctime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
-                    filetime_m = str(datetime.fromtimestamp(os.path.getmtime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
-                    filetime_a = str(datetime.fromtimestamp(os.path.getatime(filePath)).strftime('%Y-%m-%d %H:%M:%S'))
-                    filesize = str(os.path.getsize(filePath))
+                    filetime_c = str(datetime.fromtimestamp(os.path.getctime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
+                    filetime_m = str(datetime.fromtimestamp(os.path.getmtime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
+                    filetime_a = str(datetime.fromtimestamp(os.path.getatime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
+                    filesize = str(os.path.getsize(file_path))
                     # f = open (filePath, 'r')
 
                     str_to_file = COMPNAME + ", " + file_path + ", " + filesize + ", " + filetime_c + ", " + filetime_m + ", " + filetime_a
