@@ -36,11 +36,17 @@ There are not any tools for this task.
 
 Пример: DESKTOP-NBV0BJF_C.csv, где DESKTOP-NBV0BJF – имя машины, а С – имя диска 
 На выходе:   ИмяМашины_Диск.csv
-Имена полей: "$compname";"FullName";"Length";"CreationTime";"ModifiedTime";"AccessTime"
-Пример файла (DESKTOP-NBV0BJF_C.csv): 
+
+Имена полей: **"$compname";"FullName";"Length";"CreationTime";"ModifiedTime";"AccessTime"**
+
+Пример файла **DESKTOP-NBV0BJF_C.csv**: 
+
 "$compname";"FullName";"Length";"CreationTime";"ModifiedTime";"AccessTime"
+
 "DESKTOP-NBV0BJF";"C:\$compname.csv";"916144";"05.03.2019 19:47:01";"916144";"05.03.2019 19:47:01";"916144";"05.03.2019 19:47:01"
+
 "DESKTOP-NBV0BJF";"C:\01_GeoScanner\01_GeoScanner.log";"5361";"05.03.2019 19:47:01";"916144";"05.03.2019 19:47:01";"916144";"05.03.2019 19:47:01"
+
 "DESKTOP-NBV0BJF";"C:\01_GeoScanner\exclusions.txt";"50";"05.03.2019 19:47:01";"916144";"05.03.2019 19:47:01";"916144";"05.03.2019 19:47:01"
 
 Получается таблица:
