@@ -2,6 +2,7 @@ Windows
 Users
 Program Files
 Program Files (x86)
+ProgramData
 Applications
 bin
 cores
