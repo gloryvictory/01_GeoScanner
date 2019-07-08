@@ -95,46 +95,12 @@ def get_final_list_by_disk(disk=''):
     return list_result
 
 
-def csv_file_init(filename=''):
-    with open(filename, 'w') as f:
-        f.write(
-            '$compname' + CSV_SEPARATOR + 'FullName' + CSV_SEPARATOR + 'Length' + CSV_SEPARATOR + 'CreationTime' + CSV_SEPARATOR + 'ModifiedTime' + CSV_SEPARATOR + 'AccessTime' + '\n')
+# def csv_file_init(filename=''):
+#     with open(filename, 'w') as f:
+#         f.write(
+#             '$compname' + CSV_SEPARATOR + 'FullName' + CSV_SEPARATOR + 'Length' + CSV_SEPARATOR + 'CreationTime' + CSV_SEPARATOR + 'ModifiedTime' + CSV_SEPARATOR + 'AccessTime' + '\n')
 
-def ScanDir(dir_root=''):
-    time1 = datetime.now()
-    LOGGER.info("Start scan at" + str(time1))
-
-    dir_count = 0
-
-    for root, subdirs, files in os.walk(dirname):
-
-        for file in os.listdir(root):
-
-            file_path = str(os.path.join(root, file))
-
-            if os.path.isdir(file_path):
-                dir_count += 1
-            else:
-                # print(filePath)
-                try:
-                    filetime_c = str(datetime.fromtimestamp(os.path.getctime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
-                    filetime_m = str(datetime.fromtimestamp(os.path.getmtime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
-                    filetime_a = str(datetime.fromtimestamp(os.path.getatime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
-                    filesize = str(os.path.getsize(file_path))
-                    # f = open (filePath, 'r')
-
-                    str_to_file = COMPNAME + ", " + file_path + ", " + filesize + ", " + filetime_c + ", " + filetime_m + ", " + filetime_a
-                    print(str_to_file)
-
-                except Exception as e:
-                    LOGGER.error("Exception occurred", exc_info=True)
-
-    LOGGER.info("Directory count " + str(dir_count))
-    time1 = datetime.now()
-    LOGGER.info("Start scan at" + str(time1))
-    time2 = datetime.now()
-    LOGGER.info("Stop scan at" + str(time2))
-    LOGGER.info("Duration scan " + str(time2 - time1))
+#def ScanDir(dir_root=''):
 
 
 def ScanDisk():
@@ -181,18 +147,53 @@ def ScanDisk():
         for drive_letter in available_drives:
 
             FILE_CSV = COMPNAME + "_" + str(drive_letter).replace(":", "") + '.csv'
-            csv_file_init(FILE_CSV)
+            #csv_file_init(FILE_CSV)
+            with open(FILE_CSV, 'w') as f:
+                    f.write('$compname' + CSV_SEPARATOR + 'FullName' + CSV_SEPARATOR + 'Length' + CSV_SEPARATOR + 'CreationTime' + CSV_SEPARATOR + 'ModifiedTime' + CSV_SEPARATOR + 'AccessTime' + '\n')
 
-            list_result_directories = get_final_list_by_disk(drive_letter)
-            LOGGER.info("List result" + str(list_result_directories))
+                list_result_directories = get_final_list_by_disk(drive_letter)
+                LOGGER.info("List result" + str(list_result_directories))
 
-            for directory in list_result_directories:
-                ScanDir(directory)
+                for directory in list_result_directories:
+                    time1 = datetime.now()
+                    LOGGER.info("Start scan at" + str(time1))
 
+                    dir_count = 0
 
+                    for root, subdirs, files in os.walk(dirname):
 
+                        for file in os.listdir(root):
 
+                            file_path = str(os.path.join(root, file))
 
+                            if os.path.isdir(file_path):
+                                dir_count += 1
+                            else:
+                                # print(filePath)
+                                try:
+                                    filetime_c = str(
+                                        datetime.fromtimestamp(os.path.getctime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
+                                    filetime_m = str(
+                                        datetime.fromtimestamp(os.path.getmtime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
+                                    filetime_a = str(
+                                        datetime.fromtimestamp(os.path.getatime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
+                                    filesize = str(os.path.getsize(file_path))
+                                    # f = open (filePath, 'r')
+
+                                    str_to_file = COMPNAME + ", " + file_path + ", " + filesize + ", " + filetime_c + ", " + filetime_m + ", " + filetime_a
+                                    print(str_to_file)
+
+                                    f.write(str_to_file)
+
+                                except Exception as e:
+                                    LOGGER.error("Exception occurred", exc_info=True)
+
+                    LOGGER.info("Directory count " + str(dir_count))
+                    time1 = datetime.now()
+                    LOGGER.info("Start scan at" + str(time1))
+                    time2 = datetime.now()
+                    LOGGER.info("Stop scan at" + str(time2))
+                    LOGGER.info("Duration scan " + str(time2 - time1))
 
 
 def main():
