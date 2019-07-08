@@ -125,6 +125,8 @@ def ScanDir(dir_root=''):
         print(str(_platform))
         #dirname = str("/")
         dirname = '/Users/Macintosh/Desktop/Dropbox/MyPrj/MyGeo/01_GeoScanner/TestGeoData'
+        print("On Linux and MacOS it does'nt work. only Windows!!!!")
+        #return
 
     # Windows or Windows 64-bit
     elif _platform == "win32" or _platform == "win64":
