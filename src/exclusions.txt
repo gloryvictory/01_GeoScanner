@@ -2,3 +2,21 @@ Windows
 Users
 Program Files
 Program Files (x86)
+Applications
+bin
+cores
+dev
+Developer
+etc
+home
+Library
+net
+Network
+opt
+private
+sbin
+System
+tmp
+usr
+var
+Volumes

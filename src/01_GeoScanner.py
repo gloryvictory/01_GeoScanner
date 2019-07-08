@@ -84,7 +84,7 @@ def ScanDir(dir_root=''):
     # linux OR MAC OS X
     if _platform == "linux" or _platform == "linux2" or _platform == "darwin":
         print(str(_platform))
-        # dirname = str("/")
+        #dirname = str("/")
         dirname = '/Users/Macintosh/Desktop/Dropbox/MyPrj/MyGeo/01_GeoScanner/TestGeoData'
 
     # Windows or Windows 64-bit
@@ -98,6 +98,13 @@ def ScanDir(dir_root=''):
         file_name = COMPNAME + "_" + str(available_drives[0]).replace(":", "") + '.csv'
         with open(file_name, 'w') as f:
             f.write('$compname' + CSV_SEPARATOR + 'FullName' + CSV_SEPARATOR + 'Length' + CSV_SEPARATOR + 'CreationTime' + CSV_SEPARATOR + 'ModifiedTime' + CSV_SEPARATOR + 'AccessTime' + '\n')
+
+    list_excl = get_list_exclusions()
+    list_root = get_list_root(dirname)
+
+    list_result = list(set(list_root).difference(list_excl))
+    LOGGER.info("List result" + str(list_result))
+
 
     # for root, files in os.walk(dirname):
     #     for f in files:
@@ -140,14 +147,16 @@ def ScanDir(dir_root=''):
     LOGGER.info("Duration scan " + str(time2 - time1))
 
 
+def get_list_root(disk_or_root=""):
+    list_dir = []
+    try:
+        list_dir = os.listdir(disk_or_root)
+    except Exception as e:
+        LOGGER.error("Exception occurred. Directory in get_list_root wrong. get_list_root = "+ str(disk_or_root), exc_info=True)
+    return list_dir
 
-def main():
-    time1 = datetime.now()
-    print('Starting at :' + str(time1))
 
-    global LOGGER
-    LOGGER = InitLogFile()
-
+def get_list_exclusions():
     global file_exclude
     global LIST_EXCLUDE
 
@@ -162,6 +171,19 @@ def main():
             LIST_EXCLUDE = []
     except Exception as e:
         LOGGER.error("Exception occurred", exc_info=True)
+
+    return LIST_EXCLUDE
+
+
+def main():
+    time1 = datetime.now()
+    print('Starting at :' + str(time1))
+
+    global LOGGER
+    LOGGER = InitLogFile()
+
+
+
 
 
     ScanDir('')
