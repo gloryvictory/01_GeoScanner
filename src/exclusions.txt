@@ -17,6 +17,5 @@ private
 sbin
 System
 tmp
-usr
 var
 Volumes

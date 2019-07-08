@@ -54,6 +54,45 @@ def InitLogFile():
     logger.info("Program started")
     return logger
 
+def get_list_root(disk_or_root=""):
+    list_dir = []
+    list_final = []
+    try:
+        list_dir = os.listdir(disk_or_root)
+        for f in list_dir:
+            if not f.startswith('.'): # skipping hidden files and folders
+                p = disk_or_root + f
+                if os.path.isdir(p):
+                    list_final.append(f)
+    except Exception as e:
+        LOGGER.error("Exception occurred. Directory in get_list_root wrong. get_list_root = "+ str(disk_or_root), exc_info=True)
+    return list_final
+
+
+def get_list_exclusions():
+    global file_exclude
+    global LIST_EXCLUDE
+
+    file_exclude = 'exclusions.txt'
+    LIST_EXCLUDE = []
+    try:
+        if os.path.isfile(file_exclude):
+            LIST_EXCLUDE = get_list_from_file(file_exclude)
+            LOGGER.info("File exclusions found. Excludes folders count: " + str(len(LIST_EXCLUDE)))
+        else:
+            LOGGER.info("File not found: " + file_exclude)
+            LIST_EXCLUDE = []
+    except Exception as e:
+        LOGGER.error("Exception occurred", exc_info=True)
+
+    return LIST_EXCLUDE
+
+
+def get_final_list_by_disk(disk=''):
+    list_excl = get_list_exclusions()
+    list_root = get_list_root(disk)
+    list_result = list(set(list_root).difference(list_excl))
+    return list_result
 
 def ScanDir(dir_root=''):
     LOGGER.info("scan_directory")
@@ -99,10 +138,8 @@ def ScanDir(dir_root=''):
         with open(file_name, 'w') as f:
             f.write('$compname' + CSV_SEPARATOR + 'FullName' + CSV_SEPARATOR + 'Length' + CSV_SEPARATOR + 'CreationTime' + CSV_SEPARATOR + 'ModifiedTime' + CSV_SEPARATOR + 'AccessTime' + '\n')
 
-    list_excl = get_list_exclusions()
-    list_root = get_list_root(dirname)
+    list_result = get_final_list_by_disk('/')
 
-    list_result = list(set(list_root).difference(list_excl))
     LOGGER.info("List result" + str(list_result))
 
 
@@ -146,33 +183,6 @@ def ScanDir(dir_root=''):
     LOGGER.info("Stop scan at" + str(time2))
     LOGGER.info("Duration scan " + str(time2 - time1))
 
-
-def get_list_root(disk_or_root=""):
-    list_dir = []
-    try:
-        list_dir = os.listdir(disk_or_root)
-    except Exception as e:
-        LOGGER.error("Exception occurred. Directory in get_list_root wrong. get_list_root = "+ str(disk_or_root), exc_info=True)
-    return list_dir
-
-
-def get_list_exclusions():
-    global file_exclude
-    global LIST_EXCLUDE
-
-    file_exclude = 'exclusions.txt'
-    LIST_EXCLUDE = []
-    try:
-        if os.path.isfile(file_exclude):
-            LIST_EXCLUDE = get_list_from_file(file_exclude)
-            LOGGER.info("File exclusions found. Excludes folders count: " + str(len(LIST_EXCLUDE)))
-        else:
-            LOGGER.info("File not found: " + file_exclude)
-            LIST_EXCLUDE = []
-    except Exception as e:
-        LOGGER.error("Exception occurred", exc_info=True)
-
-    return LIST_EXCLUDE
 
 
 def main():
