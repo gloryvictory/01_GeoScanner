@@ -8,3 +8,4 @@ PerfLogs
 $Recycle.Bin
 Python37
 go
+Recovery
