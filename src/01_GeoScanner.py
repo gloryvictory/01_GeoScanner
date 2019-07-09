@@ -89,9 +89,20 @@ def get_list_exclusions():
 
 
 def get_final_list_by_disk(disk=''):
+    list_result = []
+    if len(disk) == 0:
+        return list_result
+
+    if len(disk) == 1:
+        disk = disk + ":" + os.sep
+
+    if len(disk) == 2:
+        disk = disk + os.sep
+
     list_excl = get_list_exclusions()
     list_root = get_list_root(disk)
     list_result = list(set(list_root).difference(list_excl))
+    print(str(list_result))
     return list_result
 
 
@@ -144,11 +155,14 @@ def ScanDisk():
         LOGGER.info("Disk drives are " + str(available_drives))
 
         # dirname = available_drives[0] + SEPARATOR
-        for drive_letter in available_drives:
+        #for drive_letter in available_drives:
+        if len(available_drives) > 0:
+
+            drive_letter = str(available_drives[0])
 
             FILE_CSV = COMPNAME + "_" + str(drive_letter).replace(":", "") + '.csv'
             #csv_file_init(FILE_CSV)
-            with open(FILE_CSV, 'w') as f:
+            with open(FILE_CSV, 'w', encoding='utf-8') as f:
                     f.write('$compname' + CSV_SEPARATOR + 'FullName' + CSV_SEPARATOR + 'Length' + CSV_SEPARATOR + 'CreationTime' + CSV_SEPARATOR + 'ModifiedTime' + CSV_SEPARATOR + 'AccessTime' + '\n')
 
                     list_result_directories = get_final_list_by_disk(drive_letter)
@@ -164,27 +178,27 @@ def ScanDisk():
 
                                 file_path = str(os.path.join(root, file))
 
-                                if os.path.isdir(file_path):
-                                    dir_count += 1
-                                else:
-                                    # print(filePath)
-                                    try:
-                                        filetime_c = str(
-                                            datetime.fromtimestamp(os.path.getctime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
-                                        filetime_m = str(
-                                            datetime.fromtimestamp(os.path.getmtime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
-                                        filetime_a = str(
-                                            datetime.fromtimestamp(os.path.getatime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
-                                        filesize = str(os.path.getsize(file_path))
-                                        # f = open (filePath, 'r')
-
-                                        str_to_file = COMPNAME + ", " + file_path + ", " + filesize + ", " + filetime_c + ", " + filetime_m + ", " + filetime_a
-                                        print(str_to_file)
-
-                                        f.write(str_to_file)
-
-                                    except Exception as e:
-                                        LOGGER.error("Exception occurred", exc_info=True)
+                                # if os.path.isdir(file_path):
+                                #     dir_count += 1
+                                # else:
+                                #     # print(filePath)
+                                #     try:
+                                #         filetime_c = str(
+                                #             datetime.fromtimestamp(os.path.getctime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
+                                #         filetime_m = str(
+                                #             datetime.fromtimestamp(os.path.getmtime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
+                                #         filetime_a = str(
+                                #             datetime.fromtimestamp(os.path.getatime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
+                                #         filesize = str(os.path.getsize(file_path))
+                                #         # f = open (filePath, 'r')
+                                #
+                                #         str_to_file = COMPNAME + ", " + file_path + ", " + filesize + ", " + filetime_c + ", " + filetime_m + ", " + filetime_a
+                                #         print(str_to_file)
+                                #
+                                #         f.write(str_to_file)
+                                #
+                                #     except Exception as e:
+                                #         LOGGER.error("Exception occurred", exc_info=True)
 
                         LOGGER.info("Directory count " + str(dir_count))
                         time1 = datetime.now()

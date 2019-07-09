@@ -3,20 +3,8 @@ Users
 Program Files
 Program Files (x86)
 ProgramData
-Applications
-bin
-cores
-dev
-Developer
-etc
-home
-Library
-net
-Network
-opt
-private
-sbin
-System
-tmp
-var
-Volumes
+System Volume Information
+PerfLogs
+$Recycle.Bin
+Python37
+go
