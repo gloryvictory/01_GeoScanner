@@ -163,51 +163,52 @@ def ScanDisk():
             FILE_CSV = COMPNAME + "_" + str(drive_letter).replace(":", "") + '.csv'
             #csv_file_init(FILE_CSV)
             with open(FILE_CSV, 'w', encoding='utf-8') as f:
-                    f.write('$compname' + CSV_SEPARATOR + 'FullName' + CSV_SEPARATOR + 'Length' + CSV_SEPARATOR + 'CreationTime' + CSV_SEPARATOR + 'ModifiedTime' + CSV_SEPARATOR + 'AccessTime' + '\n')
+                f.write('$compname' + CSV_SEPARATOR + 'FullName' + CSV_SEPARATOR + 'Length' + CSV_SEPARATOR + 'CreationTime' + CSV_SEPARATOR + 'ModifiedTime' + CSV_SEPARATOR + 'AccessTime' + '\n')
 
-                    list_result_directories = get_final_list_by_disk(drive_letter)
-                    LOGGER.info("List result" + str(list_result_directories))
-                    time1 = datetime.now()
-                    LOGGER.info("Start scan at" + str(time1))
+                list_result_directories = get_final_list_by_disk(drive_letter)
+                LOGGER.info("List result" + str(list_result_directories))
+                time1 = datetime.now()
+                LOGGER.info("Start scan at" + str(time1))
 
-                    for directory in list_result_directories:
-                        dir_count = 0
-                        dir_current = drive_letter + os.sep + directory
-                        for root, subdirs, files in os.walk(dir_current):
-                            for file in os.listdir(root):
+                for directory in list_result_directories:
+                    dir_count = 0
+                    dir_current = drive_letter + os.sep + directory
+                    for root, subdirs, files in os.walk(dir_current):
+                        for file in os.listdir(root):
 
-                                file_path = str(os.path.join(root, file))
+                            file_path = str(os.path.join(root, file))
 
-                                if os.path.isdir(file_path):
-                                    dir_count += 1
-                                else:
-                                    # print(filePath)
-                                    try:
-                                        filetime_c = str(
-                                            datetime.fromtimestamp(os.path.getctime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
-                                        filetime_m = str(
-                                            datetime.fromtimestamp(os.path.getmtime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
-                                        filetime_a = str(
-                                            datetime.fromtimestamp(os.path.getatime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
-                                        filesize = str(os.path.getsize(file_path))
-                                        # f = open (filePath, 'r')
+                            if os.path.isdir(file_path):
+                                dir_count += 1
+                            else:
+                                # print(filePath)
+                                try:
+                                    filetime_c = str(
+                                        datetime.fromtimestamp(os.path.getctime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
+                                    filetime_m = str(
+                                        datetime.fromtimestamp(os.path.getmtime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
+                                    filetime_a = str(
+                                        datetime.fromtimestamp(os.path.getatime(file_path)).strftime('%Y-%m-%d %H:%M:%S'))
+                                    filesize = str(os.path.getsize(file_path))
+                                    # f = open (filePath, 'r')
 
-                                        str_to_file = COMPNAME + ", " + file_path + ", " + filesize + ", " + filetime_c + ", " + filetime_m + ", " + filetime_a
-                                        if not str_to_file.endswith('\n'):
-                                            str_to_file = str_to_file + '\n'
-                                        print(str_to_file)
+                                    str_to_file = COMPNAME + ", " + file_path + ", " + filesize + ", " + filetime_c + ", " + filetime_m + ", " + filetime_a
+                                    if not str_to_file.endswith('\n'):
+                                        str_to_file = str_to_file + '\n'
+                                    print(str_to_file)
 
-                                        f.write(str_to_file)
+                                    f.write(str_to_file)
 
-                                    except Exception as e:
-                                        LOGGER.error("Exception occurred", exc_info=True)
+                                except Exception as e:
+                                    LOGGER.error("Exception occurred", exc_info=True)
+                f.close()
 
-                        LOGGER.info("Directory count " + str(dir_count))
-                        time1 = datetime.now()
-                        LOGGER.info("Start scan at" + str(time1))
-                        time2 = datetime.now()
-                        LOGGER.info("Stop scan at" + str(time2))
-                        LOGGER.info("Duration scan " + str(time2 - time1))
+                    # LOGGER.info("Directory count " + str(dir_count))
+                    # time1 = datetime.now()
+                    # LOGGER.info("Start scan at" + str(time1))
+                    # time2 = datetime.now()
+                    # LOGGER.info("Stop scan at" + str(time2))
+                    # LOGGER.info("Duration scan " + str(time2 - time1))
 
 
 def main():
