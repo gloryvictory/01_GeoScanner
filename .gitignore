@@ -1,3 +1,6 @@
+*.zip
+*.log
+*.csv
 .idea
 helpers
 test_data

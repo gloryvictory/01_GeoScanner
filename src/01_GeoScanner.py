@@ -54,6 +54,7 @@ def InitLogFile():
     logger.info("Program started")
     return logger
 
+
 def get_list_root(disk_or_root=""):
     list_dir = []
     list_final = []
@@ -201,15 +202,18 @@ def ScanDisk():
 
                                 except Exception as e:
                                     LOGGER.error("Exception occurred", exc_info=True)
+                    LOGGER.info("Directory count " + str(dir_count))
+                    time1 = datetime.now()
+                    LOGGER.info("Start scan at" + str(time1))
+                    time2 = datetime.now()
+                    LOGGER.info("Stop scan at" + str(time2))
+                    LOGGER.info("Duration scan " + str(time2 - time1))
+
+                
+                
                 f.close()
 
-                    # LOGGER.info("Directory count " + str(dir_count))
-                    # time1 = datetime.now()
-                    # LOGGER.info("Start scan at" + str(time1))
-                    # time2 = datetime.now()
-                    # LOGGER.info("Stop scan at" + str(time2))
-                    # LOGGER.info("Duration scan " + str(time2 - time1))
-
+                    
 
 def main():
     time1 = datetime.now()
