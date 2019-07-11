@@ -10,7 +10,11 @@
             "request": "launch",
             "program": "${file}",
             "pythonPath": "C:\\Python36\\python.exe",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}/src"
+
+            ],   
         }
         {
             "name": "Python: Current File (External Terminal)",

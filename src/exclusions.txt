@@ -6,6 +6,12 @@ ProgramData
 System Volume Information
 PerfLogs
 $Recycle.Bin
+Python36
 Python37
 go
 Recovery
+Boot
+MSOCache
+found.000
+found.001
+inetpub

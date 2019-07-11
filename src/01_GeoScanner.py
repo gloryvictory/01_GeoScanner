@@ -76,6 +76,8 @@ def get_list_exclusions():
 
     file_exclude = 'exclusions.txt'
     LIST_EXCLUDE = []
+    print(str(os.getcwd()))
+
     try:
         if os.path.isfile(file_exclude):
             LIST_EXCLUDE = get_list_from_file(file_exclude)
@@ -202,13 +204,14 @@ def ScanDisk():
 
                                 except Exception as e:
                                     LOGGER.error("Exception occurred", exc_info=True)
-                    LOGGER.info("Directory count " + str(dir_count))
                     time1 = datetime.now()
-                    LOGGER.info("Start scan at" + str(time1))
+                    # LOGGER.info("Start scan at" + str(time1))
                     time2 = datetime.now()
-                    LOGGER.info("Stop scan at" + str(time2))
-                    LOGGER.info("Duration scan " + str(time2 - time1))
+                    # LOGGER.info("Stop scan at" + str(time2))
+                    # LOGGER.info("Duration scan " + str(time2 - time1))
 
+                    LOGGER.info("Directory: " + directory + " counts: " + str(dir_count) + " Duration scan: " + str(time2 - time1))
+                    
                 
                 
                 f.close()
