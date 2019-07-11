@@ -157,6 +157,7 @@ def ScanDisk():
         available_drives = ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
         LOGGER.info("Disk drives are " + str(available_drives))
 
+        dir_counts_total = 0    
         # dirname = available_drives[0] + SEPARATOR
         #for drive_letter in available_drives:
         if len(available_drives) > 0:
@@ -176,6 +177,8 @@ def ScanDisk():
                 for directory in list_result_directories:
                     dir_count = 0
                     dir_current = drive_letter + os.sep + directory
+                    time1 = datetime.now()
+
                     for root, subdirs, files in os.walk(dir_current):
                         for file in os.listdir(root):
 
@@ -204,18 +207,16 @@ def ScanDisk():
 
                                 except Exception as e:
                                     LOGGER.error("Exception occurred", exc_info=True)
-                    time1 = datetime.now()
-                    # LOGGER.info("Start scan at" + str(time1))
                     time2 = datetime.now()
                     # LOGGER.info("Stop scan at" + str(time2))
                     # LOGGER.info("Duration scan " + str(time2 - time1))
-
+                    dir_counts_total += dir_count
                     LOGGER.info("Directory: " + directory + " counts: " + str(dir_count) + " Duration scan: " + str(time2 - time1))
                     
                 
                 
                 f.close()
-
+                LOGGER.info("All Directories: " + directory + " counts: " + str(dir_counts_total))
                     
 
 def main():
@@ -239,6 +240,8 @@ def main():
     print('Finishing at :' + str(time2))
     print('Total time : ' + str(time2 - time1))
     print('DONE !!!!')
+    LOGGER.info("Duration scan script: " + str(time2 - time1))
+
 
 
 if __name__ == '__main__':
