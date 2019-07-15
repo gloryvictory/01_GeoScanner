@@ -138,12 +138,6 @@ def ScanDisk():
     LOGGER.info(platform.uname())
     # dirname = '/Users/Macintosh/Desktop/Dropbox/MyPrj/MyGeo/01_GeoScanner/TestGeoData'
 
-    # if len(dir_root) == 0:
-    #     dirname = str(os.getcwd())
-    # else:
-    #     dirname = str(dir_root)
-
-    # linux OR MAC OS X
     if _platform == "linux" or _platform == "linux2" or _platform == "darwin":
         print(str(_platform))
         #dirname = str("/")
@@ -154,13 +148,14 @@ def ScanDisk():
     # Windows or Windows 64-bit
     elif _platform == "win32" or _platform == "win64":
         print(str(_platform))
-        available_drives = ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
+
+        available_drives = ['%s:' % d for d in string.ascii_uppercase.strip('AB') if os.path.exists('%s:' % d)]
         LOGGER.info("Disk drives are " + str(available_drives))
 
         dir_counts_total = 0    
         # dirname = available_drives[0] + SEPARATOR
-        #for drive_letter in available_drives:
-        if len(available_drives) > 0:
+        for drive_letter in available_drives:
+        #if len(available_drives) > 0:
 
             drive_letter = str(available_drives[0])
 
