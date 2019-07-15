@@ -8,10 +8,8 @@
 #   Desc    :   script for finding geodata (shp, mif/mid, gps ...) and metadata and all data on Windows/linux/mac disks
 
 
-import os
 #import datetime
 from datetime import datetime
-#, date, time
 import logging
 from sys import platform
 import os
@@ -61,12 +59,12 @@ def get_list_root(disk_or_root=""):
     try:
         list_dir = os.listdir(disk_or_root)
         for f in list_dir:
-            if not f.startswith('.'): # skipping hidden files and folders
+            if not f.startswith('.'):  # skipping hidden files and folders
                 p = disk_or_root + f
                 if os.path.isdir(p):
                     list_final.append(f)
     except Exception as e:
-        LOGGER.error("Exception occurred. Directory in get_list_root wrong. get_list_root = "+ str(disk_or_root), exc_info=True)
+        LOGGER.error("Exception occurred. Directory in get_list_root wrong. get_list_root = " + str(disk_or_root), exc_info=True)
     return list_final
 
 
@@ -109,15 +107,7 @@ def get_final_list_by_disk(disk=''):
     return list_result
 
 
-# def csv_file_init(filename=''):
-#     with open(filename, 'w') as f:
-#         f.write(
-#             '$compname' + CSV_SEPARATOR + 'FullName' + CSV_SEPARATOR + 'Length' + CSV_SEPARATOR + 'CreationTime' + CSV_SEPARATOR + 'ModifiedTime' + CSV_SEPARATOR + 'AccessTime' + '\n')
-
-#def ScanDir(dir_root=''):
-
-
-def ScanDisk():
+def scan_disk():
     LOGGER.info("scan_directory")
 
     global PLATFORM
@@ -140,10 +130,9 @@ def ScanDisk():
 
     if _platform == "linux" or _platform == "linux2" or _platform == "darwin":
         print(str(_platform))
-        #dirname = str("/")
         dirname = '/Users/Macintosh/Desktop/Dropbox/MyPrj/MyGeo/01_GeoScanner/TestGeoData'
         print("On Linux and MacOS it does'nt work. only Windows!!!!")
-        #return
+        return
 
     # Windows or Windows 64-bit
     elif _platform == "win32" or _platform == "win64":
@@ -208,8 +197,7 @@ def ScanDisk():
                     dir_counts_total += dir_count
                     LOGGER.info("Directory: " + directory + " counts: " + str(dir_count) + " Duration scan: " + str(time2 - time1))
                     
-                
-                
+
                 f.close()
                 LOGGER.info("All Directories: " + directory + " counts: " + str(dir_counts_total))
                     
@@ -222,13 +210,7 @@ def main():
     LOGGER = InitLogFile()
 
 
-
-
-
-    ScanDisk()
-
-
-
+    scan_disk()
 
 
     time2 = datetime.now()
@@ -236,7 +218,6 @@ def main():
     print('Total time : ' + str(time2 - time1))
     print('DONE !!!!')
     LOGGER.info("Duration scan script: " + str(time2 - time1))
-
 
 
 if __name__ == '__main__':
