@@ -9,3 +9,5 @@ TestGeoData
 pip_install.sh
 test.code-workspace
 examples
+.vscode
+.idea
