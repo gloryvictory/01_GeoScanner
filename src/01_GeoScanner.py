@@ -150,7 +150,7 @@ def scan_disk():
 
             FILE_CSV = COMPNAME + "_" + str(drive_letter).replace(":", "") + '.csv'
             #csv_file_init(FILE_CSV)
-            with open(FILE_CSV, 'w', encoding='utf-8') as f:
+            with open(FILE_CSV, 'w', encoding='utf-8', errors='ignore') as f:
                 f.write('$compname' + CSV_SEPARATOR + 'FullName' + CSV_SEPARATOR + 'Length' + CSV_SEPARATOR + 'CreationTime' + CSV_SEPARATOR + 'ModifiedTime' + CSV_SEPARATOR + 'AccessTime' + '\n')
 
                 list_result_directories = get_final_list_by_disk(drive_letter)
