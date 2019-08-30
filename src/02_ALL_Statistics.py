@@ -5,7 +5,7 @@
 #   email   :   zamaraev@gmail.com
 #   Date    :   15.07.2019
 #   Copyright   : (C) 2019 by Viacheslav Zamaraev
-#   Desc    :   script for finding geodata (shp, mif/mid, gps ...) and metadata and all data on Windows/linux/mac disks
+#   Desc    :   script for analysis geodata (shp, mif/mid, gps ...)
 
 
 import os
@@ -16,21 +16,17 @@ import sys
 import string
 
 
-def setup_logger(logger_name = 'log', level=logging.INFO):
+def setup_logger(logger_name='log', level=logging.INFO):
     log_file = logger_name + '.log'
     lll = logging.getLogger(logger_name)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fileHandler = logging.FileHandler(log_file, mode='w')
-    fileHandler.setFormatter(formatter)
-    # streamHandler = logging.StreamHandler()
-    # streamHandler.setFormatter(formatter)
-
+    file_handler = logging.FileHandler(log_file, mode='w')
+    file_handler.setFormatter(formatter)
     lll.setLevel(level)
-    lll.addHandler(fileHandler)
-    # l.addHandler(streamHandler)
+    lll.addHandler(file_handler)
 
 
-def InitLogFile():
+def init_log_file():
     setup_logger('02_All_Statistics')
     logger = logging.getLogger('02_All_Statistics')
     logger.info("Program started")
@@ -42,7 +38,7 @@ def main():
     print('Starting at :' + str(time1))
 
     global LOGGER
-    LOGGER = InitLogFile()
+    LOGGER = init_log_file()
 
 
     #ScanDisk()
