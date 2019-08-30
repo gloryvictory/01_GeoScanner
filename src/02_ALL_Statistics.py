@@ -18,15 +18,15 @@ import string
 
 def setup_logger(logger_name = 'log', level=logging.INFO):
     log_file = logger_name + '.log'
-    l = logging.getLogger(logger_name)
+    lll = logging.getLogger(logger_name)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     fileHandler = logging.FileHandler(log_file, mode='w')
     fileHandler.setFormatter(formatter)
     # streamHandler = logging.StreamHandler()
     # streamHandler.setFormatter(formatter)
 
-    l.setLevel(level)
-    l.addHandler(fileHandler)
+    lll.setLevel(level)
+    lll.addHandler(fileHandler)
     # l.addHandler(streamHandler)
 
 
