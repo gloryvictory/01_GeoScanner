@@ -5,7 +5,7 @@
 #   email   :   zamaraev@gmail.com
 #   Date    :   15.07.2019
 #   Copyright   : (C) 2019 by Viacheslav Zamaraev
-#   Desc    :   script for analysis geodata (shp, mif/mid, gps ...)
+#   Desc    :   script for converting csv to detailed csv for analysing in BI or Excel
 
 
 #import os
