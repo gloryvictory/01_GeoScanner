@@ -35,13 +35,28 @@ def init_log_file():
 
 
 def file_csv_load(file_name=''):
+    """
+        Read a CSV file
+
+        Row [1] = "$compname";"FullName";"Length";"CreationTime"
+    """
+
+    # with open(file_name, newline='') as csvfile:
+    #     csv_reader = csv.reader(csvfile, delimiter=';', quotechar='"')  # some settings
+    #     for row in csv_reader:
+    #         print(', '.join(row))
+    #
+    # csvfile.close()
     with open(file_name, newline='') as csvfile:
-        csv_reader = csv.reader(csvfile, delimiter=';', quotechar='"')  # some settings
-        for row in csv_reader:
-            print(', '.join(row))
-
-    csvfile.close()
-
+        reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
+        i = 0
+        for field in reader.fieldnames:
+            ss = str(field).replace("$", "").strip()
+            reader.fieldnames[i] = ss.upper()
+            print(reader.fieldnames[i])
+            i += 1
+        # for line in reader:
+        #     print(line["$compname"])
 
 def main():
     time1 = datetime.now()
