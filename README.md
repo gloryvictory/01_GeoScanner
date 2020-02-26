@@ -42,7 +42,7 @@ There are not any tools for this task.
 
 Имена полей: **"$compname";"FullName";"Length";"CreationTime";"ModifiedTime";"AccessTime"**
 
-Пример файла **DESKTOP-NBV0BJF_C.csv**: 
+Пример файла **DESKTOP-NBV0BJF-C.csv**: 
 
 "$compname";"FullName";"Length";"CreationTime";"ModifiedTime";"AccessTime"
 
